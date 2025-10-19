@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 //Define the person schema
 const personSchema = new mongoose.Schema({
@@ -6,7 +7,7 @@ const personSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    ages:{
+    age:{
         type: Number
     },
     work:{
@@ -29,6 +30,14 @@ const personSchema = new mongoose.Schema({
     salary:{
         type: Number,
         required: true
+    },
+    username:{
+        required: true,
+        type: String,
+    },
+    passport:{
+        required: true,
+        type: String,
     }
 
 });

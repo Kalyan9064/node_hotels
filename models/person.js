@@ -1,47 +1,70 @@
-const mongoose = require('mongoose');
-const passport = require('passport');
+const mongoose = require('mongoose'); // Import Mongoose for MongoDB
+const passport = require('passport'); // Import Passport (for authentication, not used directly here)
 
-//Define the person schema
+// ==========================
+// Define the person schema
+// ==========================
 const personSchema = new mongoose.Schema({
+    // Name of the person, required
     name: {
         type: String,
         required: true
     },
-    age:{
+
+    // Age of the person, optional
+    age: {
         type: Number
     },
-    work:{
+
+    // Work role, must be one of the specified values, required
+    work: {
         type: String,
-        enum: ['chef', 'waiter', 'manager'],
+        enum: ['chef', 'waiter', 'manager'], // Allowed values
         required: true
     },
-    mobile:{
+
+    // Mobile number, required
+    mobile: {
         type: String,
         required: true
     },
-    email:{
+
+    // Email address, required and unique across all documents
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    address:{
+
+    // Address of the person, optional
+    address: {
         type: String,
     },
-    salary:{
+
+    // Salary, required
+    salary: {
         type: Number,
         required: true
     },
-    username:{
+
+    // Username for login, required
+    username: {
         required: true,
         type: String,
     },
-    passport:{
+
+    // Password for login, required
+    passport: {
         required: true,
         type: String,
     }
-
 });
 
-//Create person model
+// ==========================
+// Create a Mongoose model named "Person" using the schema
+// The model provides an interface to interact with the "people" collection in MongoDB
+// ==========================
 const Person = mongoose.model('Person', personSchema);
+
+// Export the model so it can be used in other files (e.g., routes, authentication)
 module.exports = Person;
